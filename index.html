@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RyvJoki</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="lOGO RYV 2.png">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar bg-dark navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand">RyvJoki</a>
+      <form id="searchForm" class="d-flex" role="search" onsubmit="return false;">
+        <input id="searchInput" class="form-control me-2" type="search" placeholder="Cari produk"
+               aria-label="Search" autocomplete="off" />
+        <button id="searchBtn" class="btn btn-outline-success me-2" type="button">Search</button>
+        <button id="clearBtn" class="btn btn-outline-secondary" type="button">Clear</button>
+      </form>
+    </div>
+  </nav>
+
+  <!-- Carousel -->
+  <div class="container mt-3">
+    <div id="carouselExample" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="CAPCUT POWERPOINT CANVA.png" class="d-block w-100" alt="Slide 1">
+        </div>
+        <div class="carousel-item">
+          <img src="CAPCUT POWERPOINT CANV 2.png" class="d-block w-100" alt="Slide 2">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Result message -->
+  <div class="container mt-3">
+    <div id="resultMessage"></div>
+  </div>
+
+  <!-- Produk -->
+  <div class="container mt-3">
+    <div class="row" id="produkList">
+      <div class="card col-sm-6 mb-3 produk-item" data-nama="ppt" data-keywords="ppt,presentasi,slide">
+        <div class="card-header">JASA JOKI PPT</div>
+        <div class="card-body">
+          <h5 class="card-title">JOKI PPT RYV</h5>
+          <p class="card-text">Dengan joki PPT disini, anda akan mendapatkan PPT yang bagus secara cepat</p>
+          <img src="1.png" class="img-thumbnail" alt="PPT">
+          <a href="https://wa.me/6285603467858" class="btn btn-primary mt-2">Hubungi sekarang</a>
+        </div>
+      </div>
+
+      <div class="card col-sm-6 mb-3 produk-item" data-nama="poster" data-keywords="poster,desain,gambar,printing">
+        <div class="card-header">JASA JOKI POSTER</div>
+        <div class="card-body">
+          <h5 class="card-title">JOKI POSTER RYV</h5>
+          <p class="card-text">Dengan joki poster disini, anda akan mendapatkan poster yang bagus secara cepat</p>
+          <img src="1.png" class="img-thumbnail" alt="Poster">
+          <a href="https://wa.me/6285603467858" class="btn btn-primary mt-2">Hubungi sekarang</a>
+        </div>
+      </div>
+
+      <!-- Tambah produk lain di sini... -->
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+  <!-- panggil file JS -->
+  <script src="script.js"></script>
+</body>
+</html>
