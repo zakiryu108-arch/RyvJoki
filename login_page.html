@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>RyvJoki</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 53vh;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    h2 { text-align: center; }
+    input, button {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+      width: 50vh;
+      padding: 10px;
+      margin: 16px 0;
+      border-radius: 5px;
+    }
+    button {
+      border: none;
+      background: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+
+    .buttton {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+      width: 52.3vh;
+      padding: 10px;
+      margin: 16px 0;
+      border-radius: 5px;
+    }
+
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Masukkan username">
+    <input type="email" id="email" placeholder="Masukkan email">
+    <button onclick="login()" class="buttton">Login</button>
+  </div>
+
+  <script>
+    function login() {
+      let username = document.getElementById("username").value;
+      let email = document.getElementById("email").value;
+
+      if (username && email) {
+        // Simpan ke localStorage
+        localStorage.setItem("username", username);
+        localStorage.setItem("email", email);
+
+        // Redirect ke halaman lain
+        window.location.href = "index.html";
+      } else {
+        alert("Harap isi semua field!");
+      }
+    }
+  </script>
+</body>
+</html>

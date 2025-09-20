@@ -1,16 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const input = document.getElementById("searchInput");
-  const searchBtn = document.getElementById("searchBtn");
-  const clearBtn = document.getElementById("clearBtn");
+  // cari form & input di navbar (cocok untuk html yang kamu kirim)
+  const navbarForm = document.querySelector('nav form[role="search"]');
+  const input = navbarForm ? navbarForm.querySelector('input[type="search"]') : null;
+  const searchBtn = navbarForm ? navbarForm.querySelector('button[type="submit"]') : null;
+
   const produkList = document.getElementById("produkList");
   const produkItems = produkList ? produkList.querySelectorAll(".produk-item") : [];
   const carousel = document.getElementById("carouselExample");
   const resultMessage = document.getElementById("resultMessage");
 
-  // Fungsi filter utama
+  // safety: jika elemen tidak ditemukan, hentikan dengan pesan di console
+  if (!navbarForm || !input || produkItems.length === 0) {
+    console.warn("script.js: navbar form / input / produk tidak lengkap. Periksa HTML.");
+    return;
+  }
+
+  // fungsi filtering
   function filterProducts(rawKeyword) {
     const keyword = (rawKeyword || "").toLowerCase().trim();
-    const terms = keyword.split(/\s+/).filter(Boolean); // kata per kata
+    const terms = keyword.split(/\s+/).filter(Boolean);
     let foundAny = false;
 
     produkItems.forEach(item => {
@@ -19,14 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const title = (item.querySelector(".card-title")?.textContent || "").toLowerCase();
       const text = (item.querySelector(".card-text")?.textContent || "").toLowerCase();
 
-      // Jika tidak ada kata pencarian -> tampilkan semua
       if (terms.length === 0) {
         item.classList.remove("d-none");
         foundAny = true;
         return;
       }
 
-      // Pencarian: setiap term harus ada di salah satu sumber (AND search).
+      // setiap term harus match (AND). Kalau mau OR, ganti .every -> .some
       const matchesAll = terms.every(term => {
         return name.includes(term) || keywords.includes(term) || title.includes(term) || text.includes(term);
       });
@@ -39,21 +46,21 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Hide/show carousel
+    // sembunyikan / tampilkan carousel
     if (carousel) {
       if (terms.length > 0) carousel.classList.add("d-none");
       else carousel.classList.remove("d-none");
     }
 
-    // Tampilkan pesan hasil
+    // tampilkan pesan hasil
     if (!foundAny && terms.length > 0) {
       resultMessage.innerHTML = `<div class="alert alert-warning">Produk tidak ditemukan untuk "<strong>${escapeHtml(keyword)}</strong>"</div>`;
     } else {
-      resultMessage.innerHTML = ""; // kosongkan pesan
+      resultMessage.innerHTML = "";
     }
   }
 
-  // helper untuk menghindari XSS jika kamu menampilkan keyword
+  // helper escape
   function escapeHtml(str) {
     return str.replace(/[&<>"'`=\/]/g, function (s) {
       return ({
@@ -74,18 +81,20 @@ document.addEventListener("DOMContentLoaded", () => {
     filterProducts(e.target.value);
   });
 
-  // Tombol search (fallback)
-  searchBtn.addEventListener("click", () => {
+  // Tangani submit tombol Search (prevent reload)
+  navbarForm.addEventListener("submit", (e) => {
+    e.preventDefault();
     filterProducts(input.value);
   });
 
-  // Tombol clear: kosongkan input & tampilkan semua
-  clearBtn.addEventListener("click", () => {
-    input.value = "";
-    filterProducts("");
-    input.focus();
+  // keyboard: Esc untuk clear cepat
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      input.value = "";
+      filterProducts("");
+    }
   });
 
-  // Inisialisasi: tampilkan semua
+  // inisialisasi: tampilkan semua
   filterProducts("");
 });
